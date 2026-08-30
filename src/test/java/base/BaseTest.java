@@ -1,5 +1,6 @@
 package base;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.testng.annotations.AfterClass;
@@ -29,7 +30,7 @@ public class BaseTest
 		ArrayList<String> arguments=new ArrayList<>();
 		arguments.add("--start-maximized");
 		browser=playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false).setArgs(arguments));
-		context=browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
+		context=browser.newContext(new Browser.NewContextOptions().setViewportSize(null).setRecordVideoDir(Paths.get("screenrecords")).setRecordVideoSize(1280, 720));
 		page=context.newPage();
 		page.navigate(TestDataReader.getProperty("url"));
 	}
